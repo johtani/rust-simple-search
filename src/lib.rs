@@ -1,5 +1,5 @@
-mod analysis;
-mod document;
-mod index;
-mod store;
+pub mod analysis;
+pub mod document;
+pub mod index;
+pub mod store;
 

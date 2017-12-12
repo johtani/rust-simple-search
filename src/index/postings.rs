@@ -4,10 +4,9 @@ pub struct Postings {
 }
 
 impl Postings {
-    fn new (docid: i64) -> Postings {
+    fn new (docid: i64) -> Self {
         Postings {
-            docid: docid,
-            positions: vec![]
+            docid, positions: vec![]
         }
     }
 
