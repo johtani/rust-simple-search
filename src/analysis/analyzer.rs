@@ -1,4 +1,4 @@
-use std::vec::Vec;
+use analysis::Token;
 
 pub struct Analyzer {
     // TODO we will have settings
@@ -12,7 +12,7 @@ impl Analyzer {
         }
     }
 
-    pub fn tokenize(&self, text: &String) -> Vec<String> {
+    pub fn tokenize(&self, text: &String) -> Vec<Token> {
         let tokens = vec![];
 
         // TODO treat...

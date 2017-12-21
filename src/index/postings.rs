@@ -1,20 +1,21 @@
 pub struct Postings {
-    docid: i64,
-    positions: Vec<i64>,
+    docid: u64,
+    positions: Vec<usize>,
 }
 
 impl Postings {
-    fn new (docid: i64) -> Self {
+    pub fn new (docid: u64) -> Self {
         Postings {
-            docid, positions: vec![]
+            docid,
+            positions: vec![]
         }
     }
 
-    fn add_position (&mut self, position: i64) {
+    pub fn add_position (&mut self, position: usize) {
         self.positions.push(position);
     }
 
-    fn position_count (&self) -> usize {
+    fn position_count (&mut self) -> usize {
         return self.positions.len();
     }
 

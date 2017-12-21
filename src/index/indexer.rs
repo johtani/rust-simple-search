@@ -4,30 +4,35 @@ use document::Document;
 use analysis::Analyzer;
 
 pub struct Indexer {
-    invertedIndex: InvertedIndex,
-    analyzer: Analyzer,
+    inverted_index: InvertedIndex,
+    store: Storage,
+    analyzer: Analyzer
 }
 
 impl Indexer {
     pub fn new (analyzer: Analyzer, store: Storage) -> Self {
         Indexer {
+            inverted_index: InvertedIndex::new(),
             analyzer,
-            invertedIndex: InvertedIndex::new(store)
+            store
         }
     }
 
-    pub fn addDocument(&self, doc: Document) {
+    pub fn add_document(&self, doc: Document) {
         //analyze
         let tokens = self.analyzer.tokenize(&doc.text);
-        let newInvertedIndex = InvertedIndex::new(store);
+        let mut new_inverted_index = InvertedIndex::new();
 
         // check tokens.length
         if tokens.len() > 0 {
-            newInvertedIndex.createInvertedIndex(&tokens, doc.id);
+            new_inverted_index.create_inverted_index(&tokens, doc.id);
         }
 
-        self.invertedIndex.mergeInvertedIndexes(self.invertedIndex, newInvertedIndex);
+        self.inverted_index.merge_inverted_indexes(new_inverted_index);
     }
 
+    pub fn persist_inverted_index() {
+
+    }
 }
 

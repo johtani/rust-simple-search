@@ -1,12 +1,12 @@
 pub struct Document {
-    pub id: i64,
+    pub id: u64,
     pub text: String,
 }
 
 impl Document {
-    fn new (id: i64, text: &str) -> Document {
+    fn new (id: u64, text: &str) -> Document {
         Document {
-            id: id,
+            id,
             text: text.to_string(),
         }
     }
