@@ -2,7 +2,6 @@ use std::io::prelude::*;
 use std::fs::File;
 use std::io::BufWriter;
 use std::path::Path;
-use std::ptr;
 
 use index::InvertedIndex;
 use store::Encode;
@@ -38,7 +37,7 @@ impl Storage {
     }
 
     pub fn open () {
-
+        //FIXME
     }
 }
 
