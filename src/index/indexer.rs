@@ -36,3 +36,8 @@ impl Indexer {
     }
 }
 
+
+#[cfg(test)]
+mod tests {
+
+}

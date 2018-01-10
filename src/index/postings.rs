@@ -1,3 +1,4 @@
+#[derive(Serialize, Deserialize)]
 pub struct Postings {
     docid: u64,
     positions: Vec<usize>,
@@ -18,5 +19,11 @@ impl Postings {
     fn position_count (&mut self) -> usize {
         return self.positions.len();
     }
+
+}
+
+
+#[cfg(test)]
+mod tests {
 
 }

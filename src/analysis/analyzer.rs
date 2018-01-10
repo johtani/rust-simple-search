@@ -22,3 +22,16 @@ impl Analyzer {
         return tokens;
     }
 }
+
+
+#[cfg(test)]
+mod tests {
+    extern crate env_logger;
+
+    #[test]
+    fn succecss() {
+        env_logger::init().unwrap();
+        warn!("hoge");
+    }
+
+}

@@ -4,7 +4,7 @@ pub struct Document {
 }
 
 impl Document {
-    fn new (id: u64, text: &str) -> Document {
+    pub fn new (id: u64, text: &str) -> Document {
         Document {
             id,
             text: text.to_string(),

@@ -2,6 +2,8 @@ use std::collections::HashMap;
 use index::Postings;
 use analysis::Token;
 
+
+#[derive(Serialize, Deserialize)]
 pub struct InvertedIndex {
     ii: HashMap<String, Postings>
 }
@@ -15,7 +17,8 @@ impl InvertedIndex {
 
     pub fn create_inverted_index(&mut self, tokens: &Vec<Token>, docid: u64) {
         if tokens.len() == 0 {
-
+            warn!("doc[{}] has no tokens.", docid);
+            return;
         }
         let distinct_terms = distinct_terms(tokens);
         for term in distinct_terms {
@@ -23,7 +26,7 @@ impl InvertedIndex {
             self.ii.insert(term, postings);
         }
     }
-    pub fn merge_inverted_indexes(&self, new: InvertedIndex) {
+    pub fn merge_inverted_indexes(&self, new_ii: InvertedIndex) {
 
     }
 }
@@ -46,4 +49,34 @@ fn create_postings_per_token(docid: u64, term: &String, tokens: &Vec<Token>) -> 
         }
     }
     return postings;
+}
+
+#[cfg(test)]
+mod tests {
+    use super::InvertedIndex;
+
+    mod distinct_terms {
+        #[test]
+        fn success() {
+
+        }
+
+        #[test]
+        fn empty_tokens() {
+
+        }
+    }
+
+    mod create_postings_per_token {
+        #[test]
+        fn success() {
+
+        }
+
+        #[test]
+        fn empty_tokens() {
+
+        }
+
+    }
 }
