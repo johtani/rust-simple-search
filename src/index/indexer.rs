@@ -5,8 +5,8 @@ use analysis::Analyzer;
 
 pub struct Indexer {
     inverted_index: InvertedIndex,
-    store: Storage,
-    analyzer: Analyzer
+    analyzer: Analyzer,
+    store: Storage
 }
 
 impl Indexer {
@@ -31,8 +31,8 @@ impl Indexer {
         self.inverted_index.merge_inverted_indexes(new_inverted_index);
     }
 
-    pub fn persist_inverted_index() {
-
+    pub fn persist_inverted_index(&self) {
+        &self.store.persist(&self.inverted_index);
     }
 }
 

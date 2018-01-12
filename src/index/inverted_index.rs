@@ -26,6 +26,7 @@ impl InvertedIndex {
             self.ii.insert(term, postings);
         }
     }
+
     pub fn merge_inverted_indexes(&self, new_ii: InvertedIndex) {
 
     }

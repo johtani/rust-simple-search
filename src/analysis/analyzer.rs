@@ -12,9 +12,11 @@ impl Analyzer {
         }
     }
 
-    pub fn tokenize(&self, text: &String) -> Vec<Token> {
-        let tokens = vec![];
+    pub fn tokenize(&self, text: &str) -> Vec<Token> {
+        let mut tokens = vec![];
 
+        let pos = 0;
+        tokens.push(Token::new(text.to_string(), pos, text.len()));
         // TODO treat...
 
         //
@@ -31,7 +33,10 @@ mod tests {
     #[test]
     fn succecss() {
         env_logger::init().unwrap();
-        warn!("hoge");
+        info!("simple test");
+
+
+
     }
 
 }

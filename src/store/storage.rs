@@ -10,24 +10,23 @@ pub struct Storage {
     directory: String,
     file_name: String,
     encoder: Encode,
-    file_path: Path,
 }
 
 impl Storage {
     pub fn new (directory: &str, file: &str) -> Self {
         Storage {
-            directory: &directory.to_string(),
-            file_name: &file.to_string(),
+            directory: directory.to_string(),
+            file_name: file.to_string(),
             encoder: Encode::new(),
-            file_path: Path::new(&directory.to_string()).join(&file.to_string()),
         }
     }
 
-    pub fn persist (&mut self, ii: InvertedIndex) {
-        let file = match File::open(&self.file_path){
+    pub fn persist (&self, ii: &InvertedIndex) {
+        let file_path = Path::new(&self.directory.to_string()).join(&self.file_name.to_string());
+        let file = match File::open(&file_path){
             Ok(file) => file,
             Err(e) => {
-                println!("An error occurred while opening file {}:{}", &self.file_path.to_str().unwrap(), e);
+                println!("An error occurred while opening file {}:{}", &file_path.to_str().unwrap(), e);
                 return;
             }
         };

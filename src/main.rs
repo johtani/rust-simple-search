@@ -11,7 +11,7 @@ use rust_simple_search::document::Document;
 fn main() {
     env_logger::init().unwrap();
     info!("start!!");
-    let store= Storage::new("", "");
+    let store= Storage::new("/tmp", "hoge_index.json");
     let analyzer = Analyzer::new();
     let indexer = Indexer::new(analyzer, store);
 
@@ -20,4 +20,5 @@ fn main() {
     let text = "New Document!";
     let doc = Document::new(docid, text);
     indexer.add_document(doc);
+
 }
