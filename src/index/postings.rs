@@ -1,4 +1,4 @@
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, Serialize, Deserialize)]
 pub struct Postings {
     docid: u64,
     positions: Vec<usize>,

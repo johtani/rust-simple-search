@@ -13,12 +13,13 @@ fn main() {
     info!("start!!");
     let store= Storage::new("/tmp", "hoge_index.json");
     let analyzer = Analyzer::new();
-    let indexer = Indexer::new(analyzer, store);
+    let mut indexer = Indexer::new(analyzer, store);
 
     // TODO new Document & loop documents
     let docid = 1;
     let text = "New Document!";
     let doc = Document::new(docid, text);
     indexer.add_document(doc);
+    indexer.persist_inverted_index();
 
 }

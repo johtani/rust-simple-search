@@ -18,7 +18,7 @@ impl Indexer {
         }
     }
 
-    pub fn add_document(&self, doc: Document) {
+    pub fn add_document(&mut self, doc: Document) {
         //analyze
         let tokens = self.analyzer.tokenize(&doc.text);
         let mut new_inverted_index = InvertedIndex::new();
@@ -28,11 +28,11 @@ impl Indexer {
             new_inverted_index.create_inverted_index(&tokens, doc.id);
         }
 
-        self.inverted_index.merge_inverted_indexes(new_inverted_index);
+        self.inverted_index.merge_inverted_indexes(&new_inverted_index);
     }
 
-    pub fn persist_inverted_index(&self) {
-        &self.store.persist(&self.inverted_index);
+    pub fn persist_inverted_index(&mut self) {
+        self.store.persist(&self.inverted_index);
     }
 }
 

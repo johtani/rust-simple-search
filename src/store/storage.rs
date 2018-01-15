@@ -23,7 +23,7 @@ impl Storage {
 
     pub fn persist (&self, ii: &InvertedIndex) {
         let file_path = Path::new(&self.directory.to_string()).join(&self.file_name.to_string());
-        let file = match File::open(&file_path){
+        let file = match File::create(&file_path){
             Ok(file) => file,
             Err(e) => {
                 println!("An error occurred while opening file {}:{}", &file_path.to_str().unwrap(), e);

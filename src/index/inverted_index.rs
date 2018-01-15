@@ -2,16 +2,15 @@ use std::collections::HashMap;
 use index::Postings;
 use analysis::Token;
 
-
 #[derive(Serialize, Deserialize)]
 pub struct InvertedIndex {
-    ii: HashMap<String, Postings>
+    pub inverted_index: HashMap<String, Postings>
 }
 
 impl InvertedIndex {
     pub fn new () -> InvertedIndex {
         InvertedIndex {
-            ii: HashMap::new()
+            inverted_index: HashMap::new()
         }
     }
 
@@ -23,12 +22,14 @@ impl InvertedIndex {
         let distinct_terms = distinct_terms(tokens);
         for term in distinct_terms {
             let postings: Postings = create_postings_per_token(docid, &term, tokens);
-            self.ii.insert(term, postings);
+            &self.inverted_index.insert(term, postings);
         }
     }
 
-    pub fn merge_inverted_indexes(&self, new_ii: InvertedIndex) {
-
+    pub fn merge_inverted_indexes(&mut self, new_ii: &InvertedIndex) {
+        for (key, value) in &new_ii.inverted_index {
+            &self.inverted_index.insert(key.to_string(), value.clone());
+        }
     }
 }
 
