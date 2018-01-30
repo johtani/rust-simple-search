@@ -1,5 +1,5 @@
-mod analyzer;
+pub mod analyzer;
 mod token;
 
-pub use self::analyzer::Analyzer;
 pub use self::token::Token;
+pub use self::analyzer::Tokenize;

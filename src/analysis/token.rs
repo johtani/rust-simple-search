@@ -1,7 +1,7 @@
 pub struct Token {
     pub term: String,
-    start_offset: usize,
-    end_offset: usize,
+    pub start_offset: usize,
+    pub end_offset: usize,
 }
 
 impl Token {

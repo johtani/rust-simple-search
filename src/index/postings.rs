@@ -16,7 +16,7 @@ impl Postings {
         self.positions.push(position);
     }
 
-    fn position_count (&mut self) -> usize {
+    pub fn position_count (&mut self) -> usize {
         return self.positions.len();
     }
 

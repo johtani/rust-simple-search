@@ -55,7 +55,6 @@ fn create_postings_per_token(docid: u64, term: &String, tokens: &Vec<Token>) -> 
 
 #[cfg(test)]
 mod tests {
-    use super::InvertedIndex;
 
     mod distinct_terms {
         #[test]

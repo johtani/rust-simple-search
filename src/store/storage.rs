@@ -30,6 +30,7 @@ impl Storage {
                 return;
             }
         };
+        // TODO research for handling bufwriter
         let mut file_writer = BufWriter::new(file);
         file_writer.write(&self.encoder.encode(ii).as_bytes());
         file_writer.flush();

@@ -27,17 +27,24 @@ impl Tokenize for NGramAnalyzer {
 
             for i in 1..char_array.len() {
                 let mut term: String = String::new();
-                // FIXME need to loop with self.n
-                term.push(char_array[i-1]);
-                term.push(char_array[i]);
+                let mut end_offset = start_offset;
+                for j in 0..self.n {
+                    term.push(char_array[i - 1 + j]);
+                    end_offset = end_offset + char_array[i - 1 + j].len_utf8();
+                }
                 token_stream.push(Token::new(term,
                                              start_offset,
-                                             start_offset + char_array[i-1].len_utf8() + char_array[i].len_utf8()));
+                                             end_offset));
                 start_offset = start_offset + char_array[i-1].len_utf8();
+                if i > char_array.len() - self.n {
+                    break;
+                }
             }
         }
         return token_stream;
     }
+
+
 }
 
 #[cfg(test)]
@@ -60,19 +67,31 @@ mod tests {
 
     // TODO it should check offsets
     fn assert_text_token(actual: Vec<Token>, expected: Vec<&str>) {
-        assert_eq!(actual.len(), expected.len());
+        assert_eq!(actual.len(), expected.len(), "length: actual[{}] != expected[{}]", actual.len(), expected.len());
         for i in 0..actual.len() {
-            assert_eq!(actual[i].term, expected[i]);
+            assert_eq!(actual[i].term, expected[i], "[i:{}] actual [{}] != expected [{}]", i, actual[i].term, expected[i]);
+
         }
     }
-
     #[test]
-    fn succecss() {
+    fn bi_gram_succecss() {
+        //FIXME add positions to expected or make expected vector
         let n = 2;
         let analyzer = NGramAnalyzer::new(n);
         let text = "こんにちは";
         let expected = vec!["こん", "んに", "にち", "ちは"];
         assert_text_token(analyzer.tokenize(text), expected);
     }
+
+    #[test]
+    fn tri_gram_succecss() {
+        let n = 3;
+        let analyzer = NGramAnalyzer::new(n);
+        let text = "こんにちは";
+        let expected = vec!["こんに", "んにち", "にちは"];
+        assert_text_token(analyzer.tokenize(text), expected);
+    }
+
+
 
 }

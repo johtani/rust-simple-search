@@ -5,14 +5,14 @@ extern crate rust_simple_search;
 
 use rust_simple_search::store::Storage;
 use rust_simple_search::index::Indexer;
-use rust_simple_search::analysis::Analyzer;
+use rust_simple_search::analysis::analyzer::NGramAnalyzer;
 use rust_simple_search::document::Document;
 
 fn main() {
     env_logger::init().unwrap();
     info!("start!!");
     let store= Storage::new("/tmp", "hoge_index.json");
-    let analyzer = Analyzer::new();
+    let analyzer = NGramAnalyzer::new(2);
     let mut indexer = Indexer::new(analyzer, store);
 
     // TODO new Document & loop documents
