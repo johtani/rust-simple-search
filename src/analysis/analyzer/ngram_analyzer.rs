@@ -24,7 +24,6 @@ impl Tokenize for NGramAnalyzer {
         } else {
             let char_array = text.chars().collect::<Vec<char>>();
             let mut start_offset: usize = 0;
-
             for i in 1..char_array.len() {
                 let mut term: String = String::new();
                 let mut end_offset = start_offset;
@@ -43,8 +42,6 @@ impl Tokenize for NGramAnalyzer {
         }
         return token_stream;
     }
-
-
 }
 
 #[cfg(test)]
@@ -92,6 +89,14 @@ mod tests {
         assert_text_token(analyzer.tokenize(text), expected);
     }
 
+    #[test]
+    fn uni_gram_success() {
+        let n = 1;
+        let analyzer = NGramAnalyzer::new(n);
+        let text = "こんにちは";
+        let expected = vec!["こ", "ん", "に", "ち", "は"];
+        assert_text_token(analyzer.tokenize(text), expected);
 
+    }
 
 }
