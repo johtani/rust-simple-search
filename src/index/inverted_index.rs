@@ -1,16 +1,16 @@
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 use index::Postings;
 use analysis::Token;
 
 #[derive(Serialize, Deserialize)]
 pub struct InvertedIndex {
-    pub inverted_index: HashMap<String, Vec<Postings>>
+    pub inverted_index: BTreeMap<String, Vec<Postings>>
 }
 
 impl InvertedIndex {
     pub fn new () -> InvertedIndex {
         InvertedIndex {
-            inverted_index: HashMap::new()
+            inverted_index: BTreeMap::new()
         }
     }
 
@@ -26,16 +26,14 @@ impl InvertedIndex {
         }
     }
 
-    pub fn merge_inverted_indexes(&mut self, new_ii: &InvertedIndex) {
-        for (key, value) in &new_ii.inverted_index {
+    pub fn merge_inverted_indexes(&mut self, new_ii: &mut InvertedIndex) {
+        for (key, value) in new_ii.inverted_index.iter_mut() {
             let mut postings_vec: Vec<Postings>;
             match self.inverted_index.get_mut(key) {
                 Some(x) => postings_vec = x.to_vec(),
                 None => postings_vec = Vec::new(),
             }
-            for new_value in value {
-                postings_vec.push(new_value.clone());
-            }
+            postings_vec.append(value);
             &self.inverted_index.insert(key.to_string(), postings_vec.to_vec());
         }
     }

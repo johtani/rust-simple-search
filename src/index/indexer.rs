@@ -28,7 +28,7 @@ impl <T: Tokenize> Indexer<T> {
             new_inverted_index.create_inverted_index(&tokens, doc.id);
         }
 
-        self.inverted_index.merge_inverted_indexes(&new_inverted_index);
+        self.inverted_index.merge_inverted_indexes(&mut new_inverted_index);
     }
 
     pub fn persist_inverted_index(&mut self) {
