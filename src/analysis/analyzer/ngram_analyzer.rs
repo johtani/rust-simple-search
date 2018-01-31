@@ -96,7 +96,6 @@ mod tests {
         let text = "こんにちは";
         let expected = vec!["こ", "ん", "に", "ち", "は"];
         assert_text_token(analyzer.tokenize(text), expected);
-
     }
 
 }
