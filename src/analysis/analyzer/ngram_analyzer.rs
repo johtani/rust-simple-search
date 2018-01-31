@@ -24,18 +24,18 @@ impl Tokenize for NGramAnalyzer {
         } else {
             let char_array = text.chars().collect::<Vec<char>>();
             let mut start_offset: usize = 0;
-            for i in 1..char_array.len() {
+            for i in 0..char_array.len() {
                 let mut term: String = String::new();
                 let mut end_offset = start_offset;
                 for j in 0..self.n {
-                    term.push(char_array[i - 1 + j]);
-                    end_offset = end_offset + char_array[i - 1 + j].len_utf8();
+                    term.push(char_array[i + j]);
+                    end_offset = end_offset + char_array[i + j].len_utf8();
                 }
                 token_stream.push(Token::new(term,
                                              start_offset,
                                              end_offset));
-                start_offset = start_offset + char_array[i-1].len_utf8();
-                if i > char_array.len() - self.n {
+                start_offset = start_offset + char_array[i].len_utf8();
+                if i >= char_array.len() - self.n {
                     break;
                 }
             }
