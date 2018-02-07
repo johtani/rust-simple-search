@@ -5,9 +5,9 @@ pub struct Token {
 }
 
 impl Token {
-    pub fn new (term: String, start_offset: usize, end_offset: usize) -> Token {
+    pub fn new (term: &str, start_offset: usize, end_offset: usize) -> Token {
         Token {
-            term,
+            term: term.to_string(),
             start_offset,
             end_offset,
         }

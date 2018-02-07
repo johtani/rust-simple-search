@@ -64,9 +64,45 @@ fn create_postings_per_token(docid: u64, term: &String, tokens: &Vec<Token>) -> 
 #[cfg(test)]
 mod tests {
 
-    mod distinct_terms {
+    mod inverted_index {
+        use index::InvertedIndex;
+        use analysis::Token;
+
         #[test]
         fn success() {
+            let ii = InvertedIndex::new();
+            let docid = 1;
+            let tokens = vec![
+                Token::new("a", 0, 1),
+                Token::new("b", 2, 3),
+                Token::new("a", 4, 5)
+            ];
+        }
+
+
+    }
+
+
+    mod distinct_terms {
+        use index::inverted_index;
+        use analysis::Token;
+
+        #[test]
+        fn success() {
+            let tokens = vec![
+                Token::new("a", 0, 1),
+                Token::new("b", 2, 3),
+                Token::new("a", 4, 5)
+            ];
+            let expected = vec![
+                "a", "b"
+            ];
+
+            let actual = inverted_index::distinct_terms(&tokens);
+            assert_eq!(actual.len(), expected.len());
+            for i in 0..expected.len() {
+                assert_eq!(actual[i], expected[i]);
+            }
 
         }
 

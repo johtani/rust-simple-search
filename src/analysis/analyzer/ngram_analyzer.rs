@@ -31,7 +31,7 @@ impl Tokenize for NGramAnalyzer {
                     term.push(char_array[i + j]);
                     end_offset = end_offset + char_array[i + j].len_utf8();
                 }
-                token_stream.push(Token::new(term,
+                token_stream.push(Token::new(&term,
                                              start_offset,
                                              end_offset));
                 start_offset = start_offset + char_array[i].len_utf8();
@@ -67,9 +67,9 @@ mod tests {
         assert_eq!(actual.len(), expected.len(), "length: actual[{}] != expected[{}]", actual.len(), expected.len());
         for i in 0..actual.len() {
             assert_eq!(actual[i].term, expected[i], "[i:{}] actual [{}] != expected [{}]", i, actual[i].term, expected[i]);
-
         }
     }
+
     #[test]
     fn bi_gram_succecss() {
         //FIXME add positions to expected or make expected vector
@@ -95,6 +95,15 @@ mod tests {
         let analyzer = NGramAnalyzer::new(n);
         let text = "こんにちは";
         let expected = vec!["こ", "ん", "に", "ち", "は"];
+        assert_text_token(analyzer.tokenize(text), expected);
+    }
+
+    #[test]
+    fn no_token_less_than_n_chars() {
+        let n = 2;
+        let analyzer = NGramAnalyzer::new(n);
+        let text = "こ";
+        let expected = vec![];
         assert_text_token(analyzer.tokenize(text), expected);
     }
 
