@@ -13,6 +13,6 @@ impl Encode {
     pub fn encode (&self, inverted_index: &InvertedIndex) -> String {
         //FIXME handling error
         //FIXME should check whether key-sorted json or not
-        return serde_json::to_string(&inverted_index).unwrap();
+        return serde_json::to_string_pretty(&inverted_index).unwrap();
     }
 }

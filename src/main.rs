@@ -8,6 +8,7 @@ use rust_simple_search::index::Indexer;
 use rust_simple_search::analysis::analyzer::NGramAnalyzer;
 use rust_simple_search::document::Document;
 
+// this is example implementation...
 fn main() {
     env_logger::init().unwrap();
     info!("start!!");
@@ -15,11 +16,14 @@ fn main() {
     let analyzer = NGramAnalyzer::new(2);
     let mut indexer = Indexer::new(analyzer, store);
 
-    // TODO new Document & loop documents
-    let docid = 1;
-    let text = "New Document!";
-    let doc = Document::new(docid, text);
-    indexer.add_document(doc);
+    let texts = vec![
+        "Doc1!", "Doc2!", "ドキュメント3"
+    ];
+
+    for (index, text) in texts.iter().enumerate() {
+        indexer.add_document(index as u64, text);
+    }
+
     indexer.persist_inverted_index();
 
 }
