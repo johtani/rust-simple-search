@@ -2,3 +2,4 @@
 **/*.rs.bk
 .idea/
 rust-simple-search.iml
+Cargo.lock

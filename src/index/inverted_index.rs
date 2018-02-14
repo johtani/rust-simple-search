@@ -78,8 +78,6 @@ mod tests {
                 Token::new("a", 4, 5)
             ];
         }
-
-
     }
 
 
@@ -103,16 +101,22 @@ mod tests {
             for i in 0..expected.len() {
                 assert_eq!(actual[i], expected[i]);
             }
-
         }
 
         #[test]
         fn empty_tokens() {
-
+            let tokens: Vec<Token> = vec![];
+            let expected: Vec<String> = vec![];
+            let actual = inverted_index::distinct_terms(&tokens);
+            assert_eq!(actual.len(), expected.len());
+            assert_eq!(actual.len(), 0);
         }
     }
 
     mod create_postings_per_token {
+        use index::inverted_index;
+        use analysis::Token;
+
         #[test]
         fn success() {
 
