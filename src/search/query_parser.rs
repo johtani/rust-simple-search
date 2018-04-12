@@ -1,5 +1,5 @@
 use search::Query;
 
 pub fn parseQuery (queryString: &str) -> Query {
-    return Query::new();
+    return Query::new(queryString);
 }

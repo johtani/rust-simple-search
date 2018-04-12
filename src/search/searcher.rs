@@ -4,13 +4,13 @@ use document::Document;
 use analysis::Tokenize;
 use search::Results;
 
-pub struct Searcher<T: Tokenize> {
-    inverted_index: InvertedIndex,
+pub struct Searcher<'ii, T: Tokenize> {
+    inverted_index: &'ii InvertedIndex,
     analyzer: T
 }
 
-impl <T: Tokenize> Searcher<T> {
-    pub fn new (analyzer: T, inverted_index: InvertedIndex) -> Self {
+impl <'ii, T: Tokenize> Searcher<'ii,T> {
+    pub fn new (analyzer: T, inverted_index: &'ii InvertedIndex) -> Self {
         Searcher {
             inverted_index,
             analyzer
@@ -18,7 +18,7 @@ impl <T: Tokenize> Searcher<T> {
     }
 
     pub fn search(query: &str) -> Results {
-        //FIXME implemnetation
+        //TODO parse query
 
         let mut results = Results::new(query);
 

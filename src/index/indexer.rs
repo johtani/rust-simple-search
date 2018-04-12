@@ -50,6 +50,10 @@ impl <T: Tokenize> Indexer<T> {
     pub fn load_meta_data(&mut self) {
         //FIXME should we load internal_id?
     }
+
+    pub fn get_inverted_index(&self) -> &InvertedIndex{
+        return &self.inverted_index;
+    }
 }
 
 
