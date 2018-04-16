@@ -1,5 +1,5 @@
 use analysis::Token;
-use analysis::Tokenize;
+use analysis::Tokenizer;
 
 pub struct NGramAnalyzer {
     n: usize,
@@ -13,7 +13,7 @@ impl NGramAnalyzer {
     }
 }
 
-impl Tokenize for NGramAnalyzer {
+impl Tokenizer for NGramAnalyzer {
     fn tokenize(&self, text: &str) -> Vec<Token> {
         //FIXME need to decide how to handle control characters
         let mut token_stream = vec![];
@@ -48,7 +48,7 @@ impl Tokenize for NGramAnalyzer {
 mod tests {
     extern crate env_logger;
     use analysis::Token;
-    use analysis::Tokenize;
+    use analysis::Tokenizer;
     use analysis::analyzer::NGramAnalyzer;
 
 //    env_logger::init().unwrap();

@@ -1,6 +1,7 @@
 mod searcher;
-mod query_parser;
 mod query;
+mod query_parser;
+mod query_tokens;
 mod results;
 mod score_doc_id;
 mod score_doc;

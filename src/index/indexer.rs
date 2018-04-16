@@ -1,16 +1,16 @@
 use index::InvertedIndex;
 use store::Storage;
 use document::Document;
-use analysis::Tokenize;
+use analysis::Tokenizer;
 
-pub struct Indexer<T: Tokenize> {
+pub struct Indexer<T: Tokenizer> {
     inverted_index: InvertedIndex,
     analyzer: T,
     store: Storage,
     internal_id: u64
 }
 
-impl <T: Tokenize> Indexer<T> {
+impl <T: Tokenizer> Indexer<T> {
     pub fn new (analyzer: T, store: Storage) -> Self {
         Indexer {
             inverted_index: InvertedIndex::new(),

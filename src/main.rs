@@ -34,12 +34,10 @@ fn main() {
     //Search Phase
     let query = "Doc";
     info!("search \"{}\"", query);
-    {
-        //FIXMD consider lifetime in Rust...
-        let search_analyzer = NGramAnalyzer::new(2);
-        let searcher = Searcher::new(search_analyzer, indexer.get_inverted_index());
-
-    }
+    //FIXME consider lifetime in Rust...
+    //FIXME
+    let search_analyzer = NGramAnalyzer::new(2);
+    let searcher = Searcher::new(search_analyzer, indexer.get_inverted_index());
 
 }
 

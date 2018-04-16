@@ -1,5 +1,5 @@
 use analysis::Token;
 
-pub trait Tokenize {
+pub trait Tokenizer {
     fn tokenize(&self, text: &str) -> Vec<Token>;
 }
